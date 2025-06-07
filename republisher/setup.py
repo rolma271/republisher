@@ -9,8 +9,7 @@ setup(
     py_modules=[],
     data_files=[
         ('share/' + package_name, ['package.xml']),
-        ('share/' + package_name + '/launch', ['launch/republisher.launch.py']),
-        ('share/' + package_name + '/action', ['action/Republish.action']),     
+        ('share/' + package_name + '/launch', ['launch/republisher.launch.py']),   
         ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
     ],
     install_requires=['setuptools'],

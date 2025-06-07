@@ -1,8 +1,8 @@
 import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionServer
-from republisher.action import Republish
-import asyncio
+from republisher_interfaces.action import Republish
+import time
 
 class RepublisherServer(Node):
     def __init__(self):
@@ -23,7 +23,7 @@ class RepublisherServer(Node):
             feedback.word = word
             goal_handle.publish_feedback(feedback)
             self.get_logger().info(f'Republicando: {word}')
-            await asyncio.sleep(1.0)
+            time.sleep(1.0)
 
         goal_handle.succeed()
         result = Republish.Result()

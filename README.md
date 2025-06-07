@@ -10,8 +10,7 @@ git clone https://github.com/rolma271/republisher.git
 ## Construir el workspace
 
 ```console
-cd ~/ros2_ws
-colcon build --packages-select republisher --symlink-install
+colcon build --packages-select republisher republisher_interfaces
 source install/setup.bash
 ```
 

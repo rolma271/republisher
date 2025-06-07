@@ -1,14 +1,16 @@
 import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionClient
-from republisher.action import Republish
+from republisher_interfaces.action import Republish
 import sys
 
 class RepublisherClient(Node):
-    def __init__(self, text_to_send):
+    def __init__(self):
         super().__init__('republisher_client')
+        self.declare_parameter('text', '')
+        self._text = self.get_parameter('text').get_parameter_value().string_value
+
         self._client = ActionClient(self, Republish, 'republish_text')
-        self._text = text_to_send
         self._client.wait_for_server()
         self.send_goal()
 
@@ -42,9 +44,5 @@ class RepublisherClient(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    if len(sys.argv) < 2:
-        print("Uso: ros2 run republisher republisher_client 'texto a enviar'")
-        return
-    text = ' '.join(sys.argv[1:])
-    node = RepublisherClient(text)
+    node = RepublisherClient()
     rclpy.spin(node)
